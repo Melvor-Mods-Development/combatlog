@@ -164,7 +164,7 @@ function get_all_available_items() {
 }
 
 function is_item_skill_available(item_id) {
-	let found_items = get_all_available_items();  // TODO: stop this dumb generation by swapping the order we do this
+	let found_items = get_all_available_items();  // TODO: stop this dumb generation by caching the found_items once for all items, instead of this cringe per-item list-creation
 	return (found_items.indexOf(item_id) >= 0);
 }
 
