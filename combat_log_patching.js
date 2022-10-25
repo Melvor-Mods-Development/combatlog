@@ -63,11 +63,13 @@ function melvor_shouldShow(item, found) {
 }
 
 function filterItemLog_isSkillAvailable(filter, item) {
-	// Not Yet Implemented
+	// TODO: verifiy if this is enough
+	return item.isSkillAvailable;
 }
 
 function filterItemLog_isLevelAvailable(filter, item) {
-	// Not Yet Implemented
+	// TODO: verifiy if this is enough
+	return item.isLevelAvailable;
 }
 
 /* patching the functions */
