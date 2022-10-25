@@ -1,7 +1,6 @@
 {
 	"load": [
-		"chance_to_hit_precision.js",
-		"autoeat_threshold.js",
-		"slayer_extension_info.js"
+		"add_data_filters.js",
+		"combat_log_patching.js"
 	]
 }

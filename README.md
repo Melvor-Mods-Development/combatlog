@@ -1,14 +1,16 @@
 
-# HCCO Modpack
+# Combat Completion Log
 
-This modpack consists of a set of mostly independent mod-scripts, which aims to improve the user interface for HCCO players. Eventually it may open up some restrictions imposed by the game, or perhaps even add some items to reach the endgame.
+Includes two different filters which are useful to track your progress:
 
-### Install
-There are a set of ways you can install the mods with.
+- Can I get this item based on the skills I have unlocked?
+- Can I get this item based on my current levels?
 
-Either use [Melvor Mod Manager](https://github.com/CherryMace/melvor-mod-manager) if you're on Steam. Note that support for this tool may soon end, but should work for now. You can enter the url for this repository directly in there, and it will work.
+These filters are very useful for HCCO players, or even Adventurer accounts. The latter filter can be useful to see what items you're missing from your current level-situation.
 
-Otherwise, you may want to use Tampermonkey to insert each script as a mod, if you're playing from a browser.
+## Install
 
-Check the [Official Wiki for Melvor](https://wiki.melvoridle.com/w/Scripting_and_Extensions_Instructions) for better instructions.
+Melvor Idle has a way to install mods automatically through the Melvor Mod Manager. The game should be found there.
+
+To make an update, simply make a zip of all the files you want, including the manifest.json. More information is found at the [wiki page](https://wiki.melvoridle.com/w/Mod_Creation).
 
