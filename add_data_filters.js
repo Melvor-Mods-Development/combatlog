@@ -185,38 +185,6 @@ function update_all_combat_data() {
 }
 
 
-var add_filter_button = () => {
-	// TODO: this should instead just toggle a setting for enabling and disabling filter, as used in combat_log_patching.js
-	/*
-		let enable_isSkillAvailable_filter = true;
-		let enable_isLevelAvailable_filter = true;
-	*/
-
-	if ($("#completion-log-2") && $("#completion-log-2").find(".col-12")[4]) {
-		itemlog = $("#completion-log-2");
-		buttonRow = itemlog.find(".col-12")[4];
-		monsterLootButton = $("<button>", {
-			id: "complog_monster_loot",
-		 	class: "btn btn-sm btn-info m-1",
-		 	role: "button",
-		 	onclick: "complog_filter_monster_loot();",
-		 	text: "Monster loot"
-		});
-		cdoButton = $("<button>", {
-			id: "complog_cdo",
-		 	class: "btn btn-sm btn-info m-1",
-		 	role: "button",
-		 	onclick: "complog_filter_co_available();",
-		 	text: "All Combat Drops"
-		});
-		if ($("#complog_cdo").length === 0) {
-			monsterLootButton.appendTo(buttonRow);
-			cdoButton.appendTo(buttonRow);
-			let cdo_counter = complog_filter_co_available().length;
-			$("#item-log-comp-count").append(' / <span id="item-log-cdo-count">' + cdo_counter + '</span>');
-		}
-	}
-};
 
 console.log("[combatlog/add_data_filter] Loading...");
 setTimeout( () => setInterval(update_all_combat_data, 1000), 1000 );
