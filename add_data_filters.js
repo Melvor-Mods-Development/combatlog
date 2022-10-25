@@ -58,6 +58,10 @@ function get_all_available_items() {
 	/*
 	 * returns a list of all items a player will be able to get on a (combat-only) character
 	 *
+	 * this should actually take a list of all items we're starting with, and recursively
+	 * open, craft, upgrade, buy, e.g... instead of using hardcoded found_items
+	 *
+	 * maybe we should create functions for individual sources. would be cleaner
 	 */
 	let found_items = get_all_combat_drops();
 	let new_stuff = true;
