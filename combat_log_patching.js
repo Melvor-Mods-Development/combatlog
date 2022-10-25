@@ -64,12 +64,12 @@ function melvor_shouldShow(item, found) {
 
 function filterItemLog_isSkillAvailable(filter, item) {
 	// TODO: verifiy if this is enough
-	return item.isSkillAvailable;
+	return item.isItemAvailable;
 }
 
 function filterItemLog_isLevelAvailable(filter, item) {
 	// TODO: verifiy if this is enough
-	return item.isLevelAvailable;
+	return item.isItemAvailableNow;
 }
 
 /* patching the functions */
