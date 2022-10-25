@@ -3,7 +3,15 @@
 // thank you Xander for helping out
 //
 
-window.melvor_hcco_is_monster_loot = function (id) {
+function is_item_combat_loot(id) {
+	/*
+	 * checks if the item with id is found through any monster, or dungeon.
+	 *
+	 * ignores any upgrade paths, crates, or similar
+	 * activates lucky herb potion
+	 *
+	 */
+
 	if (items[id].ignoreCompletion === true) return false; // Ignore non-completion items
 
 	//	524 || 525 || 526  == Pigtayle, Poraxx and Barrantoe
@@ -30,11 +38,15 @@ window.melvor_hcco_is_monster_loot = function (id) {
 	return false;
 }
 
-window.melvor_hcco_get_monster_drops = function () {
+function get_all_combat_drops() {
+	/*
+	 * returns a list of all items dropped from combat
+	 *
+	 */
 	let found_items = [];
 	for (let i=0; i<items.length; i++) {
 		if (found_items.indexOf(i) == -1) { // avoid dupes
-			if (window.melvor_hcco_is_monster_loot(i)) {
+			if (is_item_combat_loot(i)) {
 				found_items[found_items.length] = i;
 			}
 		}
@@ -42,8 +54,12 @@ window.melvor_hcco_get_monster_drops = function () {
 	return found_items;
 }
 
-window.melvor_hcco_get_co_available = function () {
-	let found_items = window.melvor_hcco_get_monster_drops();
+function get_all_available_items() {
+	/*
+	 * returns a list of all items a player will be able to get on a (combat-only) character
+	 *
+	 */
+	let found_items = get_all_combat_drops();
 	let new_stuff = true;
 
 	if (SHOP.Materials.length === undefined) return;
@@ -147,31 +163,23 @@ window.melvor_hcco_get_co_available = function () {
 	return found_items;
 }
 
-window.complog_filter_monster_loot = function () {
-	clearItemLogSearch();
-	for (let i=0; i<items.length;i++) {
-		$(`#item-log-img-${i}`).addClass("d-none");
-	}
-
-	let found_items = window.melvor_hcco_get_monster_drops();
-	for (let i=0;i<found_items.length;i++) {
-		$(`#item-log-img-${found_items[i]}`).removeClass("d-none");
-	}
-	return found_items;
+function is_item_skill_available(item_id) {
+	let found_items = get_all_available_items();  // TODO: stop this dumb generation by swapping the order we do this
+	return (found_items.indexOf(item_id) >= 0);
 }
 
-window.complog_filter_co_available = function () {
-	clearItemLogSearch();
-	for (let i=0; i<items.length;i++) {
-		$(`#item-log-img-${i}`).addClass("d-none");
-	}
-
-	let found_items = window.melvor_hcco_get_co_available();
-	for (let i=0;i<found_items.length;i++) {
-		$(`#item-log-img-${found_items[i]}`).removeClass("d-none");
-	}
-	return found_items;
+function is_item_level_available(item_id) {
+	return is_item_skill_available(item_id);  // TODO: actually create some implementation for this
 }
+
+function update_all_combat_data() {
+	for (let i=0; i<items.length;i++) {
+		items[i].isCombatDrop = is_item_combat_loot(i);
+		items[i].isItemAvailable = is_item_skill_available(i);
+		items[i].isItemAvailableNow = is_item_level_available(i);
+	}
+}
+
 
 var add_filter_button = () => {
 	// TODO: this should instead just toggle a setting for enabling and disabling filter, as used in combat_log_patching.js
@@ -179,7 +187,6 @@ var add_filter_button = () => {
 		let enable_isSkillAvailable_filter = true;
 		let enable_isLevelAvailable_filter = true;
 	*/
-
 
 	if ($("#completion-log-2") && $("#completion-log-2").find(".col-12")[4]) {
 		itemlog = $("#completion-log-2");
@@ -207,6 +214,6 @@ var add_filter_button = () => {
 	}
 };
 
-console.log("[melvor_hcco/combat_drops_only_complog] Loading...");
-setTimeout( () => setInterval(add_filter_button, 1000), 1000 );
-console.log("[melvor_hcco/combat_drops_only_complog] Done!");
+console.log("[combatlog/add_data_filter] Loading...");
+setTimeout( () => setInterval(update_all_combat_data, 1000), 1000 );
+console.log("[combatlog/add_data_filter] Done!");
