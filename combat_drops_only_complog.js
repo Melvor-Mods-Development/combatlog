@@ -1,22 +1,15 @@
-// ==UserScript==
-// @name         Combat Drops Only Complog
-// @namespace    melvor_hcco
-// @version      0.1.1
-// @description  Adds a button to filter completion log to only show combat drop-exclusive items
-// @author       mazunki
-// @match	https://*.melvoridle.com/*
-// @exclude	https://wiki.melvoridle.com*
-// @grant       none
-// @noframes
-// ==/UserScript==
-
-// Made for version 1.0
+// Made for version 1.1 (rev 4526)
+//
+// thank you Xander for helping out
+//
 
 window.melvor_hcco_is_monster_loot = function (id) {
-	if(items[id].ignoreCompletion === true) return false; // Ignore non-completion items
-//	if(id === 524 || id === 525 || id == 526) return true // Manually adding in Pigtayle, Poraxx and Barrantoe herbs, as these come from Lucky Herb potions.
-	if(items.filter(x => x.type === 'Seeds' && x.tier === 'Herb').map(x => x["grownItemID"]).includes(id)) return true; // Programmatically search for any herb seeds and map them to their corresponding herb, then check those
-	if(id === 646) return true // Signet ring half b
+	if (items[id].ignoreCompletion === true) return false; // Ignore non-completion items
+
+	//	524 || 525 || 526  == Pigtayle, Poraxx and Barrantoe
+	if (items.filter(x => x.type === 'Seeds' && x.tier === 'Herb').map(x => x["grownItemID"]).includes(id)) return true; // Lucky Herb potion: seeds give their herbs
+
+	if (id === 646) return true // Signet Ring half (b)
 
 	for (let i=0; i<MONSTERS.length; i++) {
 		if(id === MONSTERS[i].bones) return true; // Check for bone drops
@@ -25,6 +18,7 @@ window.melvor_hcco_is_monster_loot = function (id) {
 			if (monster_loot[j][0] === id) return true;
 		}
 	}
+
 	// Check dungeon specific loot, e.g. fire cape, air shard etc.
 	for (let i=0; i<DUNGEONS.length; i++) {
 		let dungeon_loot = DUNGEONS[i].rewards;

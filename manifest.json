@@ -1,15 +1,7 @@
 {
-    "name": "HCCO Overlay",
-    "description": "Hides stuff irrelevant to 12BHCCO players, while showing more useful stuff instead",
-    "version": "1.1.2",
-    "content_scripts": [{
-        "js": [
-            "chance_to_hit_precision.js",
-            "combat_drops_only_complog.js",
-            "minified_view.js",
-            "blood_level_hud.js"
-        ]
-    }],
-	"origin": "git",
-    "id": "mazunki_melvor-12bhcco.git"
+	"load": [
+		"chance_to_hit_precision.js",
+		"autoeat_threshold.js",
+		"slayer_extension_info.js"
+	]
 }
