@@ -174,6 +174,13 @@ window.complog_filter_co_available = function () {
 }
 
 var add_filter_button = () => {
+	// TODO: this should instead just toggle a setting for enabling and disabling filter, as used in combat_log_patching.js
+	/*
+		let enable_isSkillAvailable_filter = true;
+		let enable_isLevelAvailable_filter = true;
+	*/
+
+
 	if ($("#completion-log-2") && $("#completion-log-2").find(".col-12")[4]) {
 		itemlog = $("#completion-log-2");
 		buttonRow = itemlog.find(".col-12")[4];
