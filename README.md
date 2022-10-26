@@ -10,7 +10,7 @@ These filters are very useful for HCCO players, or even Adventurer accounts. The
 
 ## Install
 
-Melvor Idle has a way to install mods automatically through the Melvor Mod Manager. The game should be found there.
+Melvor Idle has a way to install mods automatically through the Melvor Mod Manager, but this mod is **not** released there yet, since it needs to be updated for the new game version.
 
 To make an update, simply make a zip of all the files you want, including the manifest.json. More information is found at the [wiki page](https://wiki.melvoridle.com/w/Mod_Creation).
 
