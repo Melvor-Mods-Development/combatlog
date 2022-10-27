@@ -54,7 +54,8 @@ function get_all_combat_drops() {
 	return found_items;
 }
 
-function get_new_buyable_items(current_items) {
+function get_new_buyable_items(current_items, restrictions) {
+	// TODO: use restrictions instead
 	let freshItems = [];
 
 	if (SHOP.Materials.length === undefined) return;
@@ -121,7 +122,8 @@ function get_new_buyable_items(current_items) {
 	return freshItems;
 }
 
-function get_new_chest_items(current_items) {
+function get_new_chest_items(current_items, restrictions) {
+	// TODO: use restrictions? maybe
 	let freshItems = [];
 
 	for (let i=0; i<current_items.length; i++) {
@@ -138,7 +140,8 @@ function get_new_chest_items(current_items) {
 	return freshItems;
 }
 
-function get_new_craftable_items(current_items) {
+function get_new_craftable_items(current_items, restrictions) {
+	// TODO: use restrictions? maybe
 	let freshItems = [];
 
 	for (let i=0; i<items.length; i++) {
@@ -160,22 +163,18 @@ function get_new_craftable_items(current_items) {
 	return freshItems;
 }
 
-function get_all_available_items(current_items) {
+function get_all_available_items(current_items, restrictions) {
 	/*
-	 * returns a list of all items a player will be able to get on a (combat-only) character
+	 * returns a list of all items a player will be able to get based on their restrictions
 	 *
-	 * this should actually take a list of all items we're starting with, and recursively
-	 * open, craft, upgrade, buy, e.g... instead of using hardcoded found_items
-	 *
-	 * maybe we should create functions for individual sources. would be cleaner
 	 */
 	let new_stuff = true;
 
-	while (new_stuff) { // this will recursively open and craft chests
+	while (new_stuff) {
 		new_stuff = false;
-		let new_shop_items = get_new_buyable_items(current_items);
-		let new_chest_items = get_new_chest_items(current_items);
-		let new_craftable_items = get_new_craftable_items(current_items);
+		let new_shop_items = get_new_buyable_items(current_items, restrictions);
+		let new_chest_items = get_new_chest_items(current_items, restrictions);
+		let new_craftable_items = get_new_craftable_items(current_items, restrictions);
 
 		for (let i=0; i<new_shop_items.length(); i++) {
 			current_items[freshItems.length] = new_shop_items[i];
@@ -195,7 +194,8 @@ function get_all_available_items(current_items) {
 }
 
 function is_item_skill_available(item_id) {
-	let found_items = get_all_available_items();  // TODO: stop this dumb generation by caching the found_items once for all items, instead of this cringe per-item list-creation
+	let current_items = get_all_combat_drops();  // TODO: don't hardcode combat drops as starter
+	let found_items = get_all_available_items(current_items);  // TODO: stop this dumb generation by caching the found_items once for all items, instead of this cringe per-item list-creation
 	return (found_items.indexOf(item_id) >= 0);
 }
 
